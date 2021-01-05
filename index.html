@@ -9,9 +9,10 @@
  <!-- Let's add Vue here -->
  <div id="app">
 
-  <input name="field" v-model="field" />
+  <input name="field" v-model="fullName" />
 
-  <p>The current values is: {{ exclamation }}</p>
+  <p>The current firstName value is: {{ firstName }}</p>
+  <p>The current lastName value is: {{ lastName }}</p>
 
  </div>
 
@@ -20,10 +21,20 @@
    el: '#app',
    data: {
     field: '',
+    firstName: '',
+    lastName: '',
    },
    computed: {
-    exclamation: function () {
-     return this.field + '!';
+    fullName: {
+     get: function () {
+      return this.firstName + ' ' + this.lastName;
+     },
+     set: function (newValue) {
+      var names = newValue.split(' ');
+
+      this.firstName = names[0];
+      this.lastName = names[1];
+     }
     }
    }
   });
